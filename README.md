@@ -1,0 +1,2 @@
+# TrelloManagerApp
+Gestionar tareas
