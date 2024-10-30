@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.scss";
 import LoginComponent from "../../components/LoginComponent/LoginComponent";
+import RegisterComponent from "../../components/RegisterComponent/RegisterComponent";
 
 const Login: React.FC = () => {
+  const [isRegistering, setIsRegistering] = useState(false);
+  
+
   return (
     <div className="loginContainer">
       <header className="loginHeader">
@@ -17,8 +21,12 @@ const Login: React.FC = () => {
             <p>Con Trello Manager, organiza y visualiza tus tareas en un solo lugar. Perfecto para equipos y proyectos individuales.</p>
           </div>
         </div>
-        <div className="sectionRight">
-          <LoginComponent />
+        <div className={`sectionRight ${isRegistering ? "rotate" : ""}`}>
+          {isRegistering ? (
+            <RegisterComponent setIsRegistering={setIsRegistering} />
+          ) : (
+            <LoginComponent setIsRegistering={setIsRegistering}/>
+          )}
         </div>
       </main>
       <footer className="loginFooter">

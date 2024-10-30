@@ -50,7 +50,11 @@
         }
         .sectionRight{
             width: 50%;
+            transition: transform 1.0s ease;           
         }
+        .rotate {
+            transform: rotateY(360deg);
+          }
     }
 
     .loginFooter {
