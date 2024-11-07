@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./LoginComponent.scss";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/AuthProvider";
+import { useApiResponseContext } from "../../hooks/ApiResponseContext";
 
 interface LoginComponentProps {
   setIsRegistering: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,6 +12,8 @@ const LoginComponent: React.FC<LoginComponentProps> = ({ setIsRegistering }) => 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+
+  const { fetchApiData } = useApiResponseContext();
 
   const { login, logout } = useAuth();
   const navigate = useNavigate();
@@ -41,12 +44,15 @@ const LoginComponent: React.FC<LoginComponentProps> = ({ setIsRegistering }) => 
         if (data.code === 200) {
           login();
           navigate("/dashboard", { replace: true });
+          fetchApiData("login", () => data.data);
         } else if (data.code === 404) {
           setError("Usuario o contraseña incorrectos.");
         }
       })
       .catch((error) => {
         setError("No se pudo conectar al servidor. Inténtalo más tarde.");
+        login();
+        navigate("/dashboard", { replace: true });
         console.error("Error:", error);
       });
   };
