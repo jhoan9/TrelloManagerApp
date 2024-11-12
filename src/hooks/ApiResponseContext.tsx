@@ -13,6 +13,8 @@ interface ApiResponses {
 interface ApiResponseContextType {
   apiResponses: ApiResponses;
   fetchApiData: (apiKey: string, fetchFunc: () => Promise<any>) => Promise<void>;
+  clearApiResponses: () => void;
+  removeApiResponse: (apiKey: string) => void;  // Nueva función para eliminar por llave
 }
 
 const ApiResponseContext = createContext<ApiResponseContextType | undefined>(undefined);
@@ -35,8 +37,20 @@ export const ApiResponseProvider: React.FC<{ children: ReactNode }> = ({ childre
     }
   };
 
+  const clearApiResponses = () => {
+    setApiResponses({});
+  };
+
+  // Nueva función para eliminar una entrada específica
+  const removeApiResponse = (apiKey: string) => {
+    setApiResponses(prevResponses => {
+      const { [apiKey]: _, ...rest } = prevResponses;  // Desestructuramos y excluimos `apiKey`
+      return rest;
+    });
+  };
+
   return (
-    <ApiResponseContext.Provider value={{ apiResponses, fetchApiData }}>
+    <ApiResponseContext.Provider value={{ apiResponses, fetchApiData, clearApiResponses, removeApiResponse }}>
       {children}
     </ApiResponseContext.Provider>
   );

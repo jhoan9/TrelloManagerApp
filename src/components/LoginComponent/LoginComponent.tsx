@@ -51,8 +51,6 @@ const LoginComponent: React.FC<LoginComponentProps> = ({ setIsRegistering }) => 
       })
       .catch((error) => {
         setError("No se pudo conectar al servidor. Inténtalo más tarde.");
-        login();
-        navigate("/dashboard", { replace: true });
         console.error("Error:", error);
       });
   };
@@ -72,7 +70,7 @@ const LoginComponent: React.FC<LoginComponentProps> = ({ setIsRegistering }) => 
             required
           />
           <label htmlFor="email" className="floating-label">
-            Email
+            Numero de Identificación
           </label>
         </div>
         <div className="form-group">
@@ -86,7 +84,7 @@ const LoginComponent: React.FC<LoginComponentProps> = ({ setIsRegistering }) => 
             required
           />
           <label htmlFor="password" className="floating-label">
-            Password
+            Constraseña
           </label>
         </div>
         {/* Mensaje de error */}

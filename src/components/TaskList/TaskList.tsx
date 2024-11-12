@@ -1,8 +1,11 @@
 import React from 'react';
 import Tareas from '../Tareas/Tareas';
 import "./TaskList.scss";
+import Notifications from '../Notifications/Notifications'; 
 
 import { useApiResponseContext } from "../../hooks/ApiResponseContext";
+import Usuarios from '../Usuarios/Usuarios';
+import Inicio from '../Inicio/Inicio';
 
 
 interface TaskListProps {
@@ -13,15 +16,15 @@ const TaskList: React.FC<TaskListProps> = ({ activeSection }) => {
 
   const { apiResponses } = useApiResponseContext();
 
-  const users  = apiResponses.users?.data;
+  const notificaciones = apiResponses.notifications?.data;
 
-  console.log(users);
+  console.log(notificaciones);
   return (
     <div className="taskListContainer">
-      {activeSection === "inicio" && <p>Contenido de Inicio</p>}
+      {activeSection === "inicio" && <Inicio/>}
       {activeSection === "tareas" && <Tareas/>}
-      {activeSection === "usuarios" && <p>Usuarios</p>}
-      {activeSection === "notificaciones" && <p>Notificaciones Activas</p>}
+      {activeSection === "usuarios" && <Usuarios/>}
+      {activeSection === "notificaciones" && <Notifications/>}
     </div>
   );
 };

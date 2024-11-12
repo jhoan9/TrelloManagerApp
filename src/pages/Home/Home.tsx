@@ -11,33 +11,50 @@ const Home: React.FC = () => {
     const { isAuthenticated } = useAuth();
     const [activeSection, setActiveSection] = useState("inicio"); // Estado de selección
 
-    const { apiResponses, fetchApiData } = useApiResponseContext();
+    const { apiResponses, removeApiResponse, fetchApiData } = useApiResponseContext();
 
     const user = apiResponses.login?.data.id_rol;
+    const idUser = apiResponses.login?.data.id_usuario;
 
     useEffect(() => {
-        if (user === 2) {
+        if (user === 1) {
             console.log("INGRESO USE EFFECT **");
-    
+
             fetch("http://localhost:3001/api/users", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                 },
             })
-            .then((response) => {
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Error en la respuesta de la API");
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log("Datos recibidos:", data);
+                    fetchApiData("users", () => data);
+                })
+                .catch((error) => {
+                    console.error("Error al obtener los datos:", error);
+                });
+        } else {
+            removeApiResponse("users");
+            fetch(`http://localhost:3001/api/users/${idUser}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }).then((response) => {
                 if (!response.ok) {
                     throw new Error("Error en la respuesta de la API");
-                }
-                return response.json();
-            })
-            .then((data) => {
+                } return response.json();
+            }).then((data) => {
                 console.log("Datos recibidos:", data);
                 fetchApiData("users", () => data);
             })
-            .catch((error) => {
-                console.error("Error al obtener los datos:", error);
-            });
+            
         }
     }, []);
 

@@ -1,77 +1,82 @@
+// Variables para colores y fuentes
+$primary-color: #4CAF50;
+$secondary-color: #000;
+$font-size-large: 2.5rem;
+$font-size-medium: 1.5rem;
+$transition-speed: 1s;
+
 .loginContainer {
-    height: 100vh;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+
+  .loginHeader {
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .logo {
+      .titleApp {
+        font-size: $font-size-large;
+        font-weight: bold;
+        color: $secondary-color;
+        margin-left: 10rem;
+      }
+    }
+  }
+
+  .containerSection {
+    display: flex;
+    height: 80vh;
+
+    .sectionLeft {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 2rem;
+      text-align: center;
+
+      h2 {
+        font-size: $font-size-large;
+        margin-bottom: 1rem;
+        color: $secondary-color;
+      }
+
+      p {
+        font-size: $font-size-medium;
+        line-height: 1.5;
+        color: $secondary-color;
+      }
+    }
+
+    .sectionRight {
+      width: 50%;
+      transition: transform $transition-speed ease;
+      
+      &.rotate {
+        transform: rotateY(360deg);
+      }
+    }
+  }
+
+  .loginFooter {
+    height: 10vh;
     width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .loginHeader {  
-        height: 10vh;
-        width: 100vw;
-
-        .logo{
-            display: flex;
-            align-items: center;
-            width: 50%;
-            height: 100%;
-
-            .titleApp{
-
-                font-size: 2.5rem;
-                font-weight: bold;
-                color: #000;
-                margin-left: 10rem;
-            }
-        }
+    .copyrightContainer {
+      .copyRight {
+        font-size: $font-size-medium;
+        font-weight: bold;
+        color: $secondary-color;
+      }
     }
-
-    .containerSection {
-        display: flex;
-        height: 80vh;
-
-        .sectionLeft {
-            width: 50%;
-            color: #000; // Texto blanco
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            padding: 2rem;
-            text-align: center;
-
-            h2 {
-                font-size: 2.5rem;
-                margin-bottom: 1rem;
-                color: #000; // Color gris claro
-            }
-
-            p {
-                font-size: 1.5rem;
-                line-height: 1.5;
-                color: #000; // Gris claro
-            }
-        }
-        .sectionRight{
-            width: 50%;
-            transition: transform 1.0s ease;           
-        }
-        .rotate {
-            transform: rotateY(360deg);
-          }
-    }
-
-    .loginFooter {
-        height: 10vh;
-        width: 100vw;
-
-        .copyrightContainer{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-
-            .copyRight{
-                font-size: 1.5rem;
-                font-weight: bold;
-                color: black;
-            }
-        }
-    }
+  }
 }

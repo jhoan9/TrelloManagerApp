@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.scss";
 import LoginComponent from "../../components/LoginComponent/LoginComponent";
 import RegisterComponent from "../../components/RegisterComponent/RegisterComponent";
 
 const Login: React.FC = () => {
   const [isRegistering, setIsRegistering] = useState(false);
-  
+
+  // Esta función se ejecuta cuando el estado de isRegistering cambia
+  useEffect(() => {
+    if (isRegistering) {
+      // Puedes agregar lógica aquí si es necesario, por ejemplo, restablecer campos
+    }
+  }, [isRegistering]);
 
   return (
     <div className="loginContainer">
@@ -25,7 +31,7 @@ const Login: React.FC = () => {
           {isRegistering ? (
             <RegisterComponent setIsRegistering={setIsRegistering} />
           ) : (
-            <LoginComponent setIsRegistering={setIsRegistering}/>
+            <LoginComponent setIsRegistering={setIsRegistering} />
           )}
         </div>
       </main>
